@@ -1,0 +1,76 @@
+﻿@model QuizApp.Models.tbl_category
+
+@{
+    ViewBag.Title = "Add_Category";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+
+
+<title>Thêm chủ đề</title>
+
+<div>
+    <div class="col-lg-12" style="text-align:center ;margin-top:10px; color:darkgreen">
+        <h4><strong>THÊM CHỦ ĐỀ MỚI</strong></h4>
+    </div>
+    <div class="col-lg-12" style="margin-top:10px">
+        @using (Html.BeginForm())
+        {
+            if (TempData["trangthai"] != null)
+            {
+                <script>
+                    alert("Đã thêm thành công!");
+                </script>
+            }
+            @Html.AntiForgeryToken()
+
+            <div class="well">
+                <div class="form-group has-success">
+                    <label class="control-label">Tên chủ đề:</label>
+                    @Html.EditorFor(Model => Model.cat_name, new { htmlAttributes = new { @class = "form-control", @id = "inputSuccess" } })
+                </div>
+                <input type="submit" value="Thêm" class="btn btn-success btn-block" />
+            </div>
+        }
+    </div>
+        <div class="col-lg-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong> <i class="fa fa-list"></i> Danh sách các chủ đề hiện có</strong>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive" style="max-height: 450px">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-6">Tên chủ đề</th>
+                                    <th class="col-xs-3" style="text-align:center">Số phòng thi</th>
+                                    <th class="col-xs-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewData["list"] as List<QuizApp.Models.tbl_category>)
+                                {
+                                    <tr>
+
+                                        <td>@item.cat_name</td>
+                                        <td style="text-align:center">@item.cat_id</td>
+                                        <td style="text-align:center"><a class="btn btn-info" href="@Url.Action("ViewAllQuestion", new {id=item.cat_id})"> Xem chi tiết</a></td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+
+    </div>
+

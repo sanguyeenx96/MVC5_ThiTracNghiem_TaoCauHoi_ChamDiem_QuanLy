@@ -1,0 +1,40 @@
+﻿@model QuizApp.Models.tbl_questions
+
+@{
+    ViewBag.Title = "ImportExcel";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>Nhập câu hỏi từ file Excel</title>
+
+
+@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.msg != null)
+    {
+        <script>
+            alert("Đã nhập thành công!");
+        </script>
+    }
+    <div class="col-xs-12" style="margin-top:20px">
+        <div class="panel panel-success">
+            <div class="panel-heading" style="text-align:center">
+                <strong> <i class="fa fa-upload"></i>  NHẬP CÂU HỎI TỪ EXCEL</strong>
+            </div>
+            <div class="panel-body">
+                <table class="table  table-bordered table-hover ">
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">Chủ đề</td>
+                        <td class="col-xs-10">
+                            @Html.DropDownList("q_fk_catid", ViewBag.list as SelectList, "---Chọn chủ đề---", htmlAttributes: new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">Chọn file Excel</td>
+                        <td> <input type="file" name="UploadedFile" class="btn btn-outline btn-success btn-block" /> </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Tải lên" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+}

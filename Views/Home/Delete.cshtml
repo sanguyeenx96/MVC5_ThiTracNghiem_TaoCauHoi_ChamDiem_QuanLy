@@ -1,0 +1,74 @@
+﻿@model QuizApp.Models.tbl_questions
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>Xoá câu hỏi</title>
+
+<h2>Xoá câu hỏi</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.q_id)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Câu hỏi:</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.q_text)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">A.</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.QA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">B.</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.QB)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">C.</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.QC)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">D.:</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.QD)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Đáp án:</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.QCorrectAns)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-danger btn-block">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Xoá
+                </button>
+            </div>
+        </div>
+    </div>
+}

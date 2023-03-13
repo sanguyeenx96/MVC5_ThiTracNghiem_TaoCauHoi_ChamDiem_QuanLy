@@ -1,0 +1,91 @@
+﻿@model QuizApp.Models.tbl_questions
+
+@{
+    ViewBag.Title = "Add_Questions";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>Nhập câu hỏi thủ công</title>
+
+
+@using (Html.BeginForm())
+{
+    if (TempData["trangthai"] != null)
+    {
+        <script>
+                    alert("Đã thêm thành công!");
+        </script>
+    }
+
+    @Html.AntiForgeryToken()
+    <div class="col-lg-12" style="margin-top:20px">
+        <div class="panel panel-success">
+            <div class="panel-heading" style="text-align:center">
+                <strong> <i class="fa fa-edit"></i>  NHẬP CÂU HỎI THỦ CÔNG</strong>
+            </div>
+            <div class="panel-body">
+                <table class="table  table-bordered table-hover ">
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center ">Chủ đề</td>
+                        <td>
+                            @Html.DropDownList("q_fk_catid", ViewBag.list as SelectList, "---Chọn chủ đề---", htmlAttributes: new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">Câu hỏi</td>
+                        <td>
+                            @Html.EditorFor(model => model.q_text, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">A</td>
+                        <td>
+                            @Html.EditorFor(model => model.QA, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">B</td>
+                        <td>
+                            @Html.EditorFor(model => model.QB, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">C</td>
+                        <td>
+                            @Html.EditorFor(model => model.QC, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">D</td>
+                        <td>
+                            @Html.EditorFor(model => model.QD, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align:center">Đáp án đúng</td>
+                        <td>
+                            @Html.DropDownListFor(model => model.QCorrectAns,
+                                     new List<SelectListItem> {
+                                                         new SelectListItem { Value = "" , Text = "---Chọn đáp án---" },
+                                                         new SelectListItem { Value = "A" , Text = "A" },
+                                                         new SelectListItem { Value = "B" , Text = "B" },
+                                                         new SelectListItem { Value = "C" , Text = "C" },
+                                                         new SelectListItem { Value = "D" , Text = "D" }
+                                       },
+                                     new { @class = "form-control", @required = "required" })
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Thêm" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+
+
+

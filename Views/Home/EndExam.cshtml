@@ -1,0 +1,224 @@
+﻿@{
+    Layout = null;
+}
+@model QuizApp.Models.tbl_setExam
+
+<title>Kết thúc</title>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/sbadmin_white/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- MetisMenu CSS -->
+    <link href="~/Content/sbadmin_white/vendor/metisMenu/metisMenu.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/sbadmin_white/dist/css/sb-admin-2.css" rel="stylesheet" />
+    <!-- Custom Fonts -->
+    <link href="~/Content/sbadmin_white/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #ECECEC;
+        }
+    </style>
+</head>
+<body style="margin-top:20px">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10">
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td style="text-align:center">Mã: <strong>@TempData["std_manv"]</strong></td>
+                                    <td style="text-align:center">Họ tên: <strong>@TempData["std_hoten"]</strong></td>
+                                    <td style="text-align:center">Bộ phận: <strong>@TempData["std_bophan"]</strong></td>
+                                    <td style="text-align:center">Số câu hỏi: <strong>@TempData["soluongcauhoi"]</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">@TempData["score"]</div>
+                                        <div>Câu đúng</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-times fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">@TempData["sai"]</div>
+                                        <div>Câu sai</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        @{ if (Convert.ToInt32(TempData["tile"].ToString()) >= 75)
+                            {
+                                <div class="panel panel-green">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa  fa-thumbs-o-up fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge">Điểm số: @TempData["tile"].ToString() </div>
+                                                <div>Kết quả tốt!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            if((Convert.ToInt32(TempData["tile"].ToString()) >= 35) && (Convert.ToInt32(TempData["tile"].ToString()) < 75))
+                            {
+                                <div class="panel panel-yellow">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa  fa-support fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge">Điểm số: @TempData["tile"].ToString() </div>
+                                                <div>Kết quả trung bình!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             }
+                                if(Convert.ToInt32(TempData["tile"].ToString()) < 35)
+                                {
+                                <div class="panel panel-red">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa  fa-thumbs-o-down fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge">Điểm số: @TempData["tile"].ToString() </div>
+                                                <div>Không đạt!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                @using (Html.BeginForm("Luuketqua", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="submit" value="KẾT THÚC" class="btn btn-lg btn-primary btn-block" />
+                }
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:25px">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+                    <!-- .panel-heading -->
+                    <div class="panel-body">
+                        <div class="panel-group" id="accordion">
+                            @{
+                                int sothutu = 0;
+                                var i = 0;
+                                List<string> traloi = new List<string>();
+                                traloi = TempData["traloi"] as List<string>;
+                            }
+                            @{ foreach (var cauhoi in (IEnumerable<QuizApp.Models.tbl_questions>)TempData["danhsachcauhoi"])
+                                {
+                                    var cautraloi = i++;
+                                    if (cauhoi.QCorrectAns != traloi[cautraloi])
+                                    {
+                                        <div class="panel panel-danger">
+                                            <div class="panel-heading">
+                                                @(sothutu = sothutu + 1). <strong>@cauhoi.q_text</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul class="list-unstyled">
+                                                    <li>A. @cauhoi.QA</li>
+                                                    <li>B. @cauhoi.QB</li>
+                                                    <li>C. @cauhoi.QC</li>
+                                                    <li>D. @cauhoi.QD</li>
+                                                </ul>
+                                            </div>
+                                            <div class="panel-footer panel-danger">
+                                                Trả lời: <strong>@traloi[cautraloi]</strong> ||| Đáp án đúng: <strong>@cauhoi.QCorrectAns</strong>
+
+                                            </div>
+                                        </div>
+                                    }
+                                    if (cauhoi.QCorrectAns == traloi[cautraloi])
+                                    {
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                @(sothutu = sothutu + 1). <strong>@cauhoi.q_text</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul class="list-unstyled">
+                                                    <li>A. @cauhoi.QA</li>
+                                                    <li>B. @cauhoi.QB</li>
+                                                    <li>C. @cauhoi.QC</li>
+                                                    <li>D. @cauhoi.QD</li>
+                                                </ul>
+                                            </div>
+                                            <div class="panel-footer panel-success">
+                                                Trả lời: <strong>@traloi[cautraloi]</strong> ||| Đáp án đúng: <strong>@cauhoi.QCorrectAns</strong>
+
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+                            }
+                        </div>
+                    </div>
+                    <!-- .panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <div class="col-xs-1"></div>
+
+    <script src="~/Content/sbadmin_white/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/sbadmin_white/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Content/sbadmin_white/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Content/sbadmin_white/dist/js/sb-admin-2.js"></script>
+</body>
+</html>
+
+

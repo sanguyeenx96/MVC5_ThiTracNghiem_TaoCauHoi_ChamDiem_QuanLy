@@ -1,0 +1,76 @@
+﻿@model QuizApp.Models.tbl_questions
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>Sửa câu hỏi</title>
+
+<h2>Sửa câu hỏi</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.q_id)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Câu hỏi:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.q_text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.q_text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">A.</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">B.</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QB, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">C.</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">D.:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Đáp án:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QCorrectAns, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QCorrectAns, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-warning btn-block">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Sửa
+                </button>
+            </div>
+        </div>
+    </div>
+}

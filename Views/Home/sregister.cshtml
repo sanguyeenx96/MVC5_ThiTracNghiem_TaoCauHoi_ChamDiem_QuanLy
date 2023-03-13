@@ -1,0 +1,88 @@
+﻿@model QuizApp.Models.student
+
+<!-- Developer name: Jairon Landa (jaironlanda.com) -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/login-bs3/assets/bootstrap/css/bootstrap.css" />
+    <style>
+        body {
+            background-color: #6096B4;
+        }
+        .panel-style {
+            padding-top: 8%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3 panel-style">
+            @if (ViewBag.msg != null)
+            {
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> @ViewBag.msg
+                </div>
+            }
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <strong>
+                            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                            Register
+                        </strong>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @using (@Html.BeginForm("sregister", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @*<p><strong>Mã đăng ký:</strong></p>
+                        <div class="form-group">
+                            <input type="text" name="username" id="username" class="form-control" required="required" autocomplete="off">
+                        </div>*@
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập:</label>
+                            @Html.TextBoxFor(x => x.std_name, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Mật khẩu:</label>
+                            @Html.PasswordFor(x => x.std_password, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Họ tên:</label>
+                            @Html.TextBoxFor(x => x.std_hoten, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Mã nhân viên:</label>
+                            @Html.TextBoxFor(x => x.std_manv, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Bộ phận:</label>
+                            @Html.TextBoxFor(x => x.std_bophan, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @*<div class="form-group">
+                            <label for="pwd">Ảnh cá nhân:</label>
+                            <input type="file" class="form-control btn btn-info" id="imgfile" name="imgfile" />
+                        </div>*@
+                        <hr>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block"><span aria-hidden="true"></span> Đăng ký</button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/Content/login-bs3/assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/login-bs3/assets/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,125 @@
+﻿@model QuizApp.Models.tbl_questions
+
+@{
+    Layout = null;
+}
+
+<title>@TempData["std_hoten"]</title>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <title>StartQuiz</title>
+    <style>
+        body {
+            background-color:beige;
+        }
+      
+    </style>
+</head>
+<body style="margin-top:20px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align:center">
+                    Chủ để bài kiểm tra: <strong>@TempData["tenchude"]</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <tr>
+                                <td style="text-align:center">Mã: <strong>@TempData["std_manv"]</strong></td>
+                                <td style="text-align:center">Họ tên: <strong>@TempData["std_hoten"]</strong></td>
+                                <td style="text-align:center">Bộ phận: <strong>@TempData["std_bophan"]</strong></td>
+                                <td style="text-align:center">Số câu hỏi: <strong>@TempData["soluongcauhoi"]</strong></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+
+            </div>
+            <!-- /.panel -->
+
+            <div class="panel panel-primary" style="margin-top:10%">
+                <div class="panel-heading">
+                    @Html.DisplayFor(x => x.q_text)
+                    @Html.HiddenFor(x => x.QCorrectAns)
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+
+                        <div class="radio">
+                            <label>
+                                @Html.RadioButton("option", "A")<span>@Model.QA</span>
+
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                @Html.RadioButton("option", "B")<span>@Model.QB</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                @Html.RadioButton("option", "C")<span>@Model.QC</span>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                @Html.RadioButton("option", "D")<span>@Model.QD</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" value="Câu tiếp theo" class="btn btn-success btn-block" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-1"></div>
+
+    }
+</body>
+</html>
+
+
+
+
+
+
+
+
+@*<div class="row">
+    <div class="container" style="margin:0 auto;margin-top:200px">
+        <div class="row">
+            
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.QA, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.RadioButtonFor(x => x.QA, "", new { @class = "text-danger" })
+        </div>
+        <div class="row">
+            <h3>@Html.RadioButtonFor(x => x.QB, new { @class = "form-control" }) @Model.QB</h3>
+        </div>
+        <div class="row">
+            <h3>@Html.RadioButtonFor(x => x.QC, new { @class = "form-control" }) @Model.QC</h3>
+        </div>
+        <div class="row">
+            <h3>@Html.RadioButtonFor(x => x.QD, new { @class = "form-control" }) @Model.QD</h3>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="submit" class="btn btn-default" />
+        </div>
+    </div>
+</div>*@
