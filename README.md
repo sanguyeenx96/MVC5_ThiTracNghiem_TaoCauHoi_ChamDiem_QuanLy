@@ -1,5 +1,5 @@
 # MVC5_ThiTracNghiem_TaoCauHoi_ChamDiem_QuanLy
-MVC5 + Bootstrap + SBAdmin + SQL Server
+2MVC5 + Bootstrap + SBAdmin + SQL Server
 
 Trang web thi trắc nghiệm. Chức năng chính:
 
